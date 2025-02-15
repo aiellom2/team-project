@@ -42,3 +42,6 @@ def plot_temps():
     print(temps, file=sys.stdout)
     return render_template('plot_temps.html',cities = cities,temps = temps)
     
+@app.route('/student-main')
+def studentMainPage():
+    return render_template('student-main.html')
