@@ -42,6 +42,54 @@ def plot_temps():
     print(temps, file=sys.stdout)
     return render_template('plot_temps.html',cities = cities,temps = temps)
     
+# Student Routes
 @app.route('/student-main')
 def studentMainPage():
-    return render_template('student-main.html')
+    return render_template('student/student-main.html')
+
+@app.route('/student-login', endpoint='studentLoginPage')
+def studentLoginPage():
+    return render_template('student/student-login.html')
+
+@app.route('/student-register', endpoint='studentRegisterPage')
+def studentRegisterPage():
+    return render_template('student/student-register.html')
+
+@app.route('/student-forgot-password', endpoint='studentForgotPasswordPage')
+def studentForgotPasswordPage():
+    return render_template('student/student-forgot-password.html')
+
+# Teacher Routes
+@app.route('/teacher-main')
+def teacherMainPage():
+    return render_template('teacher/teacher-main.html')
+
+@app.route('/teacher-login', endpoint='teacherLoginPage')
+def teacherLoginPage():
+    return render_template('teacher/teacher-login.html')
+
+@app.route('/teacher-register', endpoint='teacherRegisterPage')
+def teacherRegisterPage():
+    return render_template('teacher/teacher-register.html')
+
+@app.route('/teacher-forgot-password', endpoint='teacherForgotPasswordPage')
+def teacherForgotPasswordPage():
+    return render_template('teacher/teacher-forgot-password.html')
+
+# Admin Routes
+@app.route('/admin-main')
+def adminMainPage():
+    return render_template('admin/admin-main.html')
+
+@app.route('/admin-login', endpoint='adminLoginPage')
+def adminLoginPage():
+    return render_template('admin/admin-login.html')
+
+@app.route('/admin-register', endpoint='adminRegisterPage')
+def adminRegisterPage():
+    return render_template('admin/admin-register.html')
+
+@app.route('/admin-forgot-password', endpoint='adminForgotPasswordPage')
+def adminForgotPasswordPage():
+    return render_template('admin/admin-forgot-password.html')
+ 
