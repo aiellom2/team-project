@@ -36,8 +36,8 @@ function loadSidebar() {
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>      
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-teachers">Teachers</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-users">Students</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-needs">Reports</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-students">Students</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-reports">Reports</a>
                
             </div>
         `;

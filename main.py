@@ -114,6 +114,10 @@ def teacherRegisterPage():
 def teacherForgotPasswordPage():
     return render_template('teacher/teacher-forgot-password.html')
 
+@app.route('/teacher-students', endpoint='teacherStudentsPage')
+def teacherStudentsPage():
+    return render_template('teacher/teacher-students.html')
+
 # Teacher Objectives
 @app.route('/teacher-objectives', endpoint='teacherObjectivesPage')
 def teacherObjectivesPage():
@@ -144,11 +148,26 @@ def teacherFeaturesPage():
 def teacherDiagramsPage():
     return render_template('teacher/teacher-diagrams.html')
 
-
+@app.route('/teacher-reports', endpoint='teacherReportsPage')
+def teacherReportsPage():
+    return render_template('teacher/teacher-reports.html')
+    
 # Admin Routes
-@app.route('/admin-main')
+@app.route('/admin-main', endpoint='adminMainPage')
 def adminMainPage():
     return render_template('admin/admin-main.html')
+
+@app.route('/admin-students', endpoint='adminStudentsPage')
+def adminStudentsPage():
+    return render_template('admin/admin-students.html')
+
+@app.route('/admin-teachers', endpoint='adminTeachersPage')
+def adminTeachersPage():
+    return render_template('admin/admin-teachers.html')
+
+@app.route('/admin-reports', endpoint='adminReportsPage')
+def adminReportsPage():
+    return render_template('admin/admin-reports.html')
 
 @app.route('/admin-login', endpoint='adminLoginPage')
 def adminLoginPage():
