@@ -16,6 +16,10 @@ function loadSidebar() {
             <div class="sidebar-heading border-bottom bg-light">Project Reviews</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-employees">Employees</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-vacation-requests">Vacation Requests</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-supplies-requests">Supplies Requests</a>
+
                 
         
             </div>
@@ -27,8 +31,12 @@ function loadSidebar() {
             sidebarContainer.innerHTML = `
             <div class="sidebar-heading border-bottom bg-light">Report Reviews</div>
             <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>      
-                
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-employees">Employees</a>      
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-managers">Managers</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-requests">Requests</a>      
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-reports">Reports</a>      
+
                
             </div>
         `;
@@ -42,7 +50,9 @@ function loadSidebar() {
             <div class="sidebar-heading border-bottom bg-light">Project Proposals</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>      
-                
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-vacation-requests">Vacation Requests</a>      
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-supplies-requests">Supplies Requests</a>      
+
             </div>
         `;
         
