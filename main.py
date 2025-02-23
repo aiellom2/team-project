@@ -2,45 +2,24 @@ import json
 import requests
 import sys
 
+from flask import Flask, render_template, request, redirect, url_for, flash
+import psycopg2
+from psycopg2 import sql
 
-from flask import Flask, render_template
 
 app = Flask(__name__)
-
-def read_temps():
-    city_temps = {}
-    cities=['San diego', 'New York', 'Miami', 'Las Vegas', 'Seattle', 'Denver', 'New Haven']
-    URL = 'http://api.openweathermap.org/data/2.5/weather'
-
-    for city in cities:
-        payload = {'APPID':'d208dfea1c85eb13f4cf52d216ed2f9d', 'q':city}
-        response = requests.get(URL,params = payload)
-
-        if response.status_code == 200:
-            print('Success!', file = sys.stdout)
-        elif response.status_code == 404:
-            print ('Failure!', file = sys.stdout)
-
-        response_json = response.json();
-
-        temperature = response_json['main']['temp']
-        city_temps[city] = (int((temperature -273)*1.8 + 32))
-    return city_temps
-
-@app.route('/temps')
-def show_temps():
-    city_temps = read_temps()
-    return render_template('show_temps.html',template_temps=city_temps)
+app.secret_key = 'your_secret_key'  # Needed for flash messages
 
 
-@app.route('/plot_temps')
-def plot_temps():
-    city_temps = read_temps()
-    cities = list(city_temps.keys())
-    temps = list(city_temps.values())
-    print(cities, file=sys.stdout)
-    print(temps, file=sys.stdout)
-    return render_template('plot_temps.html',cities = cities,temps = temps)
+def get_db_connection():
+    return psycopg2.connect(
+        dbname="your_db_name",
+        user="your_db_user",
+        password="your_db_password",
+        host="your_db_host",
+        port="your_db_port"
+    )
+    
     
 # employee Routes
 
@@ -75,10 +54,46 @@ def employeeVactionRequestsPage():
     return render_template('employee/employee-vacation-requests.html')
 
 # employee submit vacation request
-@app.route('/submit-vacation-request', endpoint='submitVacationRequest')
-def submitVactionRequest():
-    return render_template('employee/employee-vacation-requests.html')
+@app.route('/submit-vacation-request', methods=['GET', 'POST'], endpoint='submitVacationRequest')
+def submitVacationRequest():
+    if request.method == 'POST':
+        employee_id = 1  # Replace with actual logged-in user ID
+        trip_type = request.form['trip_type']
+        leave_date = request.form['leave_date']
+        return_date = request.form['return_date']
+        cost = request.form['cost'] if request.form['cost'] else None
+        reason = request.form['reason']
 
+        try:
+            conn = get_db_connection()
+            cur = conn.cursor()
+
+            cur.execute("SELECT employee_submit_vacation_request(%s, %s, %s, %s, %s, %s)",
+                        (employee_id, trip_type, leave_date, return_date, cost, reason))
+
+            conn.commit()
+            cur.close()
+            conn.close()
+
+            flash('Vacation request submitted successfully!', 'success')
+            return redirect(url_for('submitVacationRequest'))
+
+        except Exception as e:
+            flash(f'Error submitting vacation request: {e}', 'danger')
+
+    # Fetch vacation requests for display
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM vacation_requests ORDER BY leave_date DESC")
+        vacation_requests = cur.fetchall()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        flash(f'Error fetching vacation requests: {e}', 'danger')
+        vacation_requests = []
+
+    return render_template('employee/employee-vacation-requests.html', vacation_requests=vacation_requests)
 # manager Routes
 
 # manager Main
