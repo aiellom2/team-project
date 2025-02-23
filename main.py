@@ -69,6 +69,17 @@ def submitVacationRequest():
         }
         print(form_data) 
 
+    else:
+        form_data = {
+            "employee_id": 1,  # Replace with actual logged-in user ID
+            "trip_type": request.form['trip_type'],
+            "leave_date": request.form['leave_date'],
+            "return_date": request.form['return_date'],
+            "cost": request.form['cost'] if request.form['cost'] else None,
+            "reason": request.form['reason']
+        }
+        print(form_data)
+
     '''
     DATABASE CODE TO SEND INPUT FIELD VALUES TO A STORED PROCEDURE IN POSTGRESQL DB
         try:
