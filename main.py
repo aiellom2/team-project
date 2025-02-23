@@ -1,8 +1,7 @@
 import json
-import requests
 import sys
 
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, requests, redirect, url_for, flash
 import psycopg2
 from psycopg2 import sql
 
