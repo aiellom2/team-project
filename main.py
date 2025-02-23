@@ -2,14 +2,16 @@ import json
 import sys
 
 from flask import Flask, render_template, request, redirect, url_for, flash
-import psycopg2
-from psycopg2 import sql
+#import psycopg2
+#from psycopg2 import sql
 
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Needed for flash messages
 
+# app.secret_key = 'your_secret_key'  # Needed for flash messages
 
+''' 
+DATABASE CONNECTION CODE TO POSTGRESQL
 def get_db_connection():
     return psycopg2.connect(
         dbname="your_db_name",
@@ -18,7 +20,7 @@ def get_db_connection():
         host="your_db_host",
         port="your_db_port"
     )
-    
+'''
     
 # employee Routes
 
@@ -55,14 +57,20 @@ def employeeVactionRequestsPage():
 # employee submit vacation request
 @app.route('/submit-vacation-request', methods=['GET', 'POST'], endpoint='submitVacationRequest')
 def submitVacationRequest():
+    
     if request.method == 'POST':
-        employee_id = 1  # Replace with actual logged-in user ID
-        trip_type = request.form['trip_type']
-        leave_date = request.form['leave_date']
-        return_date = request.form['return_date']
-        cost = request.form['cost'] if request.form['cost'] else None
-        reason = request.form['reason']
+        form_data = {
+            "employee_id": 1,  # Replace with actual logged-in user ID
+            "trip_type": request.form['trip_type'],
+            "leave_date": request.form['leave_date'],
+            "return_date": request.form['return_date'],
+            "cost": request.form['cost'] if request.form['cost'] else None,
+            "reason": request.form['reason']
+        }
+        print(form_data) 
 
+    '''
+    DATABASE CODE TO SEND INPUT FIELD VALUES TO A STORED PROCEDURE IN POSTGRESQL DB
         try:
             conn = get_db_connection()
             cur = conn.cursor()
@@ -93,6 +101,7 @@ def submitVacationRequest():
         vacation_requests = []
 
     return render_template('employee/employee-vacation-requests.html', vacation_requests=vacation_requests)
+    '''
 # manager Routes
 
 # manager Main
