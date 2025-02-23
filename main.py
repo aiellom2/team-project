@@ -75,7 +75,7 @@ def employeeVactionRequestsPage():
     return render_template('employee/employee-vacation-requests.html')
 
 # employee submit vacation request
-@app.route('/submit-vacation-requests', endpoint='submitVacationRequest')
+@app.route('/submit-vacation-request', endpoint='submitVacationRequest')
 def submitVactionRequest():
     return render_template('employee/employee-vacation-requests.html')
 
