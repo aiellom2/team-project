@@ -67,7 +67,7 @@ def submitVacationRequest():
             "cost": request.form['cost'] if request.form['cost'] else None,
             "reason": request.form['reason']
         }
-        print(form_data) 
+        return form_data
 
     else:
         form_data = {
@@ -78,8 +78,7 @@ def submitVacationRequest():
             "cost": request.form['cost'] if request.form['cost'] else None,
             "reason": request.form['reason']
         }
-        print(form_data)
-
+        return form_data
     '''
     DATABASE CODE TO SEND INPUT FIELD VALUES TO A STORED PROCEDURE IN POSTGRESQL DB
         try:
