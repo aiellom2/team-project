@@ -37,7 +37,7 @@
                     <h1 class="mt-4">Employee Vacation Requests</h1>
                     
                     <h2>Submit a Vacation Request</h2>
-                    <form action="{{ url_for('submit-vacation-request') }}" method="post">
+                    <form action="{{ url_for('submitVacationRequest') }}" method="post">
                         <label for="trip_type">Trip Type:</label>
                         <select id="trip_type" name="trip_type" required>
                             <option value="Business">Business</option>
