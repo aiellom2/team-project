@@ -13,7 +13,7 @@ function loadSidebar() {
             baseUrl = '/manager';
         
             sidebarContainer.innerHTML = `
-            <div class="sidebar-heading border-bottom bg-light">Project Reviews</div>
+            <div class="sidebar-heading border-bottom bg-light">Manager</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-employees">Employees</a>
@@ -29,7 +29,7 @@ function loadSidebar() {
             baseUrl = '/admin';
         
             sidebarContainer.innerHTML = `
-            <div class="sidebar-heading border-bottom bg-light">Report Reviews</div>
+            <div class="sidebar-heading border-bottom bg-light">Admin</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-employees">Employees</a>      
@@ -47,7 +47,7 @@ function loadSidebar() {
             baseUrl = '/employee';
         
         sidebarContainer.innerHTML = `
-            <div class="sidebar-heading border-bottom bg-light">Project Proposals</div>
+            <div class="sidebar-heading border-bottom bg-light">Employee</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>      
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-vacation-requests">Vacation Requests</a>      
