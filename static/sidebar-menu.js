@@ -9,21 +9,14 @@ function loadSidebar() {
         const path = window.location.pathname;
         let baseUrl;
                 
-        if (path.includes('/teacher')) {
-            baseUrl = '/teacher';
+        if (path.includes('/manager')) {
+            baseUrl = '/manager';
         
             sidebarContainer.innerHTML = `
             <div class="sidebar-heading border-bottom bg-light">Project Reviews</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-students">Students</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-objectives">Objectives</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-users">Users</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-needs">Needs</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-stories">Stories</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-features">Features</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-diagrams">Diagrams</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-reports">Reports</a>
+                
         
             </div>
         `;
@@ -35,9 +28,7 @@ function loadSidebar() {
             <div class="sidebar-heading border-bottom bg-light">Report Reviews</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>      
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-teachers">Teachers</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-students">Students</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-reports">Reports</a>
+                
                
             </div>
         `;
@@ -45,18 +36,13 @@ function loadSidebar() {
         } else {
         
         
-            baseUrl = '/student';
+            baseUrl = '/employee';
         
         sidebarContainer.innerHTML = `
             <div class="sidebar-heading border-bottom bg-light">Project Proposals</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>      
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-objectives">Objectives</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-users">Users</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-needs">Needs</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-stories">Stories</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-features">Features</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-diagrams">Diagrams</a>
+                
             </div>
         `;
         
