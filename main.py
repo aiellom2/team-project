@@ -42,141 +42,68 @@ def plot_temps():
     print(temps, file=sys.stdout)
     return render_template('plot_temps.html',cities = cities,temps = temps)
     
-# Student Routes
-# Student Main
-@app.route('/student-main')
-def studentMainPage():
-    return render_template('student/student-main.html')
+# employee Routes
 
-# Student Login
-@app.route('/student-login', endpoint='studentLoginPage')
-def studentLoginPage():
-    return render_template('student/student-login.html')
+# employee Main
+@app.route('/employee-main')
+def employeeMainPage():
+    return render_template('employee/employee-main.html')
 
-# Student Register
-@app.route('/student-register', endpoint='studentRegisterPage')
-def studentRegisterPage():
-    return render_template('student/student-register.html')
+# employee Login
+@app.route('/employee-login', endpoint='employeeLoginPage')
+def employeeLoginPage():
+    return render_template('employee/employee-login.html')
 
-# Student Forgot Password
-@app.route('/student-forgot-password', endpoint='studentForgotPasswordPage')
-def studentForgotPasswordPage():
-    return render_template('student/student-forgot-password.html')
+# employee Register
+@app.route('/employee-register', endpoint='employeeRegisterPage')
+def employeeRegisterPage():
+    return render_template('employee/employee-register.html')
 
-# Student Objectives
-@app.route('/student-objectives', endpoint='studentObjectivesPage')
-def studentObjectivesPage():
-    return render_template('student/student-objectives.html')
+# employee Forgot Password
+@app.route('/employee-forgot-password', endpoint='employeeForgotPasswordPage')
+def employeeForgotPasswordPage():
+    return render_template('employee/employee-forgot-password.html')
 
-# Student Users
-@app.route('/student-users', endpoint='studentUsersPage')
-def studentUsersPage():
-    return render_template('student/student-users.html')
+# manager Routes
 
-# Student Needs
-@app.route('/student-needs', endpoint='studentNeedsPage')
-def studentNeedsPage():
-    return render_template('student/student-needs.html')
+# manager Main
+@app.route('/manager-main')
+def managerMainPage():
+    return render_template('manager/manager-main.html')
 
-# Student Stories
-@app.route('/student-stories', endpoint='studentStoriesPage')
-def studentStoriesPage():
-    return render_template('student/student-stories.html')
+# manager Login
+@app.route('/manager-login', endpoint='managerLoginPage')
+def managerLoginPage():
+    return render_template('manager/manager-login.html')
 
-# Student Features
-@app.route('/student-features', endpoint='studentFeaturesPage')
-def studentFeaturesPage():
-    return render_template('student/student-features.html')
+# manager Register
+@app.route('/manager-register', endpoint='managerRegisterPage')
+def managerRegisterPage():
+    return render_template('manager/manager-register.html')
 
-# Student Diagrams
-@app.route('/student-diagrams', endpoint='studentDiagramsPage')
-def studentDiagramsPage():
-    return render_template('student/student-diagrams.html')
+# manager Forgot Password
+@app.route('/manager-forgot-password', endpoint='managerForgotPasswordPage')
+def managerForgotPasswordPage():
+    return render_template('manager/manager-forgot-password.html')
 
-# Teacher Routes
-# Teacher Main
-@app.route('/teacher-main')
-def teacherMainPage():
-    return render_template('teacher/teacher-main.html')
-
-# Teacher Login
-@app.route('/teacher-login', endpoint='teacherLoginPage')
-def teacherLoginPage():
-    return render_template('teacher/teacher-login.html')
-
-# Teacher Register
-@app.route('/teacher-register', endpoint='teacherRegisterPage')
-def teacherRegisterPage():
-    return render_template('teacher/teacher-register.html')
-
-# Teacher Forgot Password
-@app.route('/teacher-forgot-password', endpoint='teacherForgotPasswordPage')
-def teacherForgotPasswordPage():
-    return render_template('teacher/teacher-forgot-password.html')
-
-@app.route('/teacher-students', endpoint='teacherStudentsPage')
-def teacherStudentsPage():
-    return render_template('teacher/teacher-students.html')
-
-# Teacher Objectives
-@app.route('/teacher-objectives', endpoint='teacherObjectivesPage')
-def teacherObjectivesPage():
-    return render_template('teacher/teacher-objectives.html')
-
-# Teacher Users
-@app.route('/teacher-users', endpoint='teacherUsersPage')
-def teacherUsersPage():
-    return render_template('teacher/teacher-users.html')
-
-# Teacher Needs
-@app.route('/teacher-needs', endpoint='teacherNeedsPage')
-def teacherNeedsPage():
-    return render_template('teacher/teacher-needs.html')
-
-# Teacher Stories
-@app.route('/teacher-stories', endpoint='teacherStoriesPage')
-def teacherStoriesPage():
-    return render_template('teacher/teacher-stories.html')
-
-# Teacher Features
-@app.route('/teacher-features', endpoint='teacherFeaturesPage')
-def teacherFeaturesPage():
-    return render_template('teacher/teacher-features.html')
-
-# Teacher Diagrams
-@app.route('/teacher-diagrams', endpoint='teacherDiagramsPage')
-def teacherDiagramsPage():
-    return render_template('teacher/teacher-diagrams.html')
-
-@app.route('/teacher-reports', endpoint='teacherReportsPage')
-def teacherReportsPage():
-    return render_template('teacher/teacher-reports.html')
-    
 # Admin Routes
+
+# admin Main 
 @app.route('/admin-main', endpoint='adminMainPage')
 def adminMainPage():
     return render_template('admin/admin-main.html')
 
-@app.route('/admin-students', endpoint='adminStudentsPage')
-def adminStudentsPage():
-    return render_template('admin/admin-students.html')
-
-@app.route('/admin-teachers', endpoint='adminTeachersPage')
-def adminTeachersPage():
-    return render_template('admin/admin-teachers.html')
-
-@app.route('/admin-reports', endpoint='adminReportsPage')
-def adminReportsPage():
-    return render_template('admin/admin-reports.html')
-
+# admin Login
 @app.route('/admin-login', endpoint='adminLoginPage')
 def adminLoginPage():
     return render_template('admin/admin-login.html')
 
+# admin Register
 @app.route('/admin-register', endpoint='adminRegisterPage')
 def adminRegisterPage():
     return render_template('admin/admin-register.html')
 
+# admin Forgot Password
 @app.route('/admin-forgot-password', endpoint='adminForgotPasswordPage')
 def adminForgotPasswordPage():
     return render_template('admin/admin-forgot-password.html')
