@@ -1,6 +1,6 @@
 import sys
 from flask import Flask, render_template, request, redirect, url_for, flash
-from db.forms import LoginForm 
+from db.forms import AdminLoginForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'  # Required for CSRF protection
@@ -52,7 +52,7 @@ def adminMainPage():
 
 @app.route('/admin-login', methods=['GET', 'POST'], endpoint='adminLoginPage')
 def adminLoginPage():
-    form = LoginForm()
+    form = AdminLoginForm()
     if form.validate_on_submit():
         flash('Admin Login Successful!', 'success')
         return redirect(url_for('adminMainPage'))
