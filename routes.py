@@ -1,6 +1,6 @@
 import sys
 from flask import Flask, render_template, request, redirect, url_for, flash
-from db.forms import AdminLoginForm
+from forms import AdminLoginForm
 
 app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'your_secret_key'  # Required for CSRF protection
