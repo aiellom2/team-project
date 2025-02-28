@@ -16,9 +16,7 @@ function loadSidebar() {
             <div class="sidebar-heading border-bottom bg-light">Manager</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-employees">Employees</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-vacation-requests">Vacation Requests</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-supplies-requests">Supplies Requests</a>
+             
 
                 
         
@@ -32,8 +30,7 @@ function loadSidebar() {
             <div class="sidebar-heading border-bottom bg-light">Admin</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-users">Users</a>      
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-requests">Requests</a>      
+                  
             </div>
         `;
         
@@ -46,8 +43,7 @@ function loadSidebar() {
             <div class="sidebar-heading border-bottom bg-light">Employee</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>      
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-vacation-requests">Vacation Requests</a>      
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-supplies-requests">Supplies Requests</a>      
+                
 
             </div>
         `;
