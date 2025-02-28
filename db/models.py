@@ -1,14 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
+from db import db  # Import db from db/__init__.py
 
-# Import db instance from db/__init__.py without causing circular import
-from db import db
-
-# Define the DB schema
-class City(db.Model):
-    __tablename__ = 'cities'
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    city = db.Column(db.String(64), unique=True, nullable=False)
-    population = db.Column(db.Integer, unique=False, nullable=False)
-
-    def __repr__(self):
-        return self.city + ': ' + str(self.population)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)

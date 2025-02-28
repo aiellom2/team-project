@@ -2,8 +2,10 @@ from os import environ, path
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()  # Define db here, without initializing it yet.
+
 def create_app():
-    # Import Flask inside the function to avoid NameError
+    # Import Flask inside the function to avoid circular import
     from flask import Flask
 
     app = Flask(__name__)
@@ -20,13 +22,10 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = DB_CONFIG_STR
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-    # Create database connection
-    db = SQLAlchemy(app)
+    # Initialize the db with app here
+    db.init_app(app)
 
     # Import routes and models after initializing app to avoid circular import
     from db import routes, models
 
     return app, db
-
-# Create the Flask app and database instance
-app, db = create_app()
