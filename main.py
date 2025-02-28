@@ -171,20 +171,12 @@ def adminRegisterPage():
 def adminForgotPasswordPage():
     return render_template('admin/admin-forgot-password.html')
  
-# admin employees
-@app.route('/admin-employees', endpoint='adminEmployees')
-def adminEmployees():
-    return render_template('admin/admin-employees.html')
+# admin users
+@app.route('/admin-users', endpoint='adminUsers')
+def adminUsers():
+    return render_template('admin/admin-users.html')
 
-# admin managers
-@app.route('/admin-managers', endpoint='adminManagers')
-def adminManagers():
-    return render_template('admin/admin-managers.html')
 
-# admin reports
-@app.route('/admin-reports', endpoint='adminReports')
-def adminReports():
-    return render_template('admin/admin-reports.html')
 
 # admin requests
 @app.route('/admin-requests', endpoint='adminRequests')
