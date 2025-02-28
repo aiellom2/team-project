@@ -1,11 +1,13 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+from os import environ
 import os
 
 
 # Environment configuration (if needed)
 load_dotenv('.flaskenv')
+
 DB_NAME = os.environ.get('SQLITE_DB')
 basedir = os.path.abspath(os.path.dirname(__file__))
 
