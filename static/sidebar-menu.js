@@ -9,7 +9,7 @@ function loadSidebar() {
         const path = window.location.pathname;
         let baseUrl;
                 
-        if (path.includes('/manager')) {
+        if (path.includes('/admin')) {
             baseUrl = '/manager';
         
             sidebarContainer.innerHTML = `
@@ -23,7 +23,7 @@ function loadSidebar() {
             </div>
         `;
         
-        } else if (path.includes('/admin')) {
+        } else if (path.includes('/manager')) {
             baseUrl = '/admin';
         
             sidebarContainer.innerHTML = `
