@@ -19,7 +19,7 @@ def create_app():
     # Initialize the database with the app
     db.init_app(app)
 
-    # You can import routes and models here
+    # Import routes and models after the app is created
     from db import routes, models
 
     return app
