@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Admin Main</title>
+        <title>{% block title %}Admin Main{% endblock %}</title>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="static/styles.css" rel="stylesheet" />
     </head>
@@ -36,8 +36,9 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">Admin Main - Content Area </h1>
-                    
+                    {% block content %}
+                    <h1 class="mt-4">Admin Main - Content Area</h1>
+                    {% endblock %}
                 </div>
             </div>
         </div>
