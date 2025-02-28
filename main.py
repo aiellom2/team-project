@@ -63,7 +63,9 @@ def adminForgotPasswordPage():
     return render_template('admin/admin-forgot-password.html')
 
 
-from db import app  
+from db import create_app  
+
+app = create_app()
 
 if __name__ == '__main__':
     app.run(debug=True)
