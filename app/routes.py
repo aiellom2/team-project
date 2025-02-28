@@ -12,7 +12,7 @@ app.config['SECRET_KEY'] = 'your_secret_key'  # Required for CSRF protection
 
 @app.route('/employee-main')
 def employeeMainPage():
-    return render_template('employee/employee-main.html')
+    return render_template('templates/employee/employee-main.html')
 
 @app.route('/employee-login', methods=['GET', 'POST'], endpoint='employeeLoginPage')
 def employeeLoginPage():
@@ -21,18 +21,18 @@ def employeeLoginPage():
         # Authentication logic goes here
         flash('Employee Login Successful!', 'success')
         return redirect(url_for('employeeMainPage'))
-    return render_template('employee/employee-login.html', form=form)
+    return render_template('templates/employee/employee-login.html', form=form)
 
 @app.route('/employee-forgot-password', endpoint='employeeForgotPasswordPage')
 def employeeForgotPasswordPage():
-    return render_template('employee/employee-forgot-password.html')
+    return render_template('templates/employee/employee-forgot-password.html')
 
 
 # Manager Routes
 
 @app.route('/manager-main')
 def managerMainPage():
-    return render_template('manager/manager-main.html')
+    return render_template('templates/manager/manager-main.html')
 
 @app.route('/manager-login', methods=['GET', 'POST'], endpoint='managerLoginPage')
 def managerLoginPage():
@@ -40,16 +40,16 @@ def managerLoginPage():
     if form.validate_on_submit():
         flash('Manager Login Successful!', 'success')
         return redirect(url_for('managerMainPage'))
-    return render_template('manager/manager-login.html', form=form)
+    return render_template('templates/manager/manager-login.html', form=form)
 
 @app.route('/manager-forgot-password', endpoint='managerForgotPasswordPage')
 def managerForgotPasswordPage():
-    return render_template('manager/manager-forgot-password.html')
+    return render_template('templates/manager/manager-forgot-password.html')
 
 
 @app.route('/admin-main', endpoint='adminMainPage')
 def adminMainPage():
-    return render_template('admin/admin-main.html')
+    return render_template('templates/admin/admin-main.html')
 
 @app.route('/admin-login', methods=['GET', 'POST'], endpoint='adminLoginPage')
 def adminLoginPage():
@@ -57,11 +57,11 @@ def adminLoginPage():
     if form.validate_on_submit():
         flash('Admin Login Successful!', 'success')
         return redirect(url_for('adminMainPage'))  # Correct endpoint for redirection
-    return render_template('admin/admin-login.html', form=form)
+    return render_template('templates/admin/admin-login.html', form=form)
 
 @app.route('/admin-forgot-password', endpoint='adminForgotPasswordPage')
 def adminForgotPasswordPage():
-    return render_template('admin/admin-forgot-password.html')
+    return render_template('templates/admin/admin-forgot-password.html')
 
 # If you are directly running the application
 if __name__ == '__main__':
