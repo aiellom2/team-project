@@ -87,16 +87,28 @@
 
     <div class="login-container">
         <h2>Admin Login</h2>
-        <form action="{{ url_for('adminLoginPage') }}" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Admin Login</button>
+
+        <!-- Flash messages for login errors -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Flask-WTF Form -->
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <p>{{ form.username.label }} {{ form.username }}</p>
+            <p>{{ form.password.label }} {{ form.password }}</p>
+            <p>{{ form.submit }}</p>
         </form>
+
         <div class="links">
             <a href="{{ url_for('adminForgotPasswordPage')}}">Forgot Password?</a>
             <a href="{{ url_for('employeeLoginPage') }}">Login as Employee</a>
             <a href="{{ url_for('managerLoginPage') }}">Login as Manager</a>
-
         </div>
     </div>
 
