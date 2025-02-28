@@ -2,25 +2,12 @@ import json
 import sys
 
 from flask import Flask, render_template, request, redirect, url_for, flash
-#import psycopg2
-#from psycopg2 import sql
+
 
 
 app = Flask(__name__)
 
-# app.secret_key = 'your_secret_key'  # Needed for flash messages
 
-''' 
-DATABASE CONNECTION CODE TO POSTGRESQL
-def get_db_connection():
-    return psycopg2.connect(
-        dbname="your_db_name",
-        user="your_db_user",
-        password="your_db_password",
-        host="your_db_host",
-        port="your_db_port"
-    )
-'''
     
 # employee Routes
 
@@ -34,84 +21,13 @@ def employeeMainPage():
 def employeeLoginPage():
     return render_template('employee/employee-login.html')
 
-# employee Register
-@app.route('/employee-register', endpoint='employeeRegisterPage')
-def employeeRegisterPage():
-    return render_template('employee/employee-register.html')
 
 # employee Forgot Password
 @app.route('/employee-forgot-password', endpoint='employeeForgotPasswordPage')
 def employeeForgotPasswordPage():
     return render_template('employee/employee-forgot-password.html')
 
-# employee supplies requests
-@app.route('/employee-supplies-requests', endpoint='employeeSuppliesRequestsPage')
-def employeeSuppliesRequestsPage():
-    return render_template('employee/employee-supplies-requests.html')
 
-# employee vacation requests
-@app.route('/employee-vacation-requests', endpoint='employeeVacationRequestsPage')
-def employeeVactionRequestsPage():
-    return render_template('employee/employee-vacation-requests.html')
-
-# employee submit vacation request
-@app.route('/submit-vacation-request', methods=['GET', 'POST'], endpoint='submitVacationRequest')
-def submitVacationRequest():
-    
-    if request.method == 'POST':
-        form_data = {
-            "employee_id": 1,  # Replace with actual logged-in user ID
-            "trip_type": request.form['trip_type'],
-            "leave_date": request.form['leave_date'],
-            "return_date": request.form['return_date'],
-            "cost": request.form['cost'] if request.form['cost'] else None,
-            "reason": request.form['reason']
-        }
-        return form_data
-
-    else:
-        form_data = {
-            "employee_id": 1,  # Replace with actual logged-in user ID
-            "trip_type": request.form['trip_type'],
-            "leave_date": request.form['leave_date'],
-            "return_date": request.form['return_date'],
-            "cost": request.form['cost'] if request.form['cost'] else None,
-            "reason": request.form['reason']
-        }
-        return form_data
-    '''
-    DATABASE CODE TO SEND INPUT FIELD VALUES TO A STORED PROCEDURE IN POSTGRESQL DB
-        try:
-            conn = get_db_connection()
-            cur = conn.cursor()
-
-            cur.execute("SELECT employee_submit_vacation_request(%s, %s, %s, %s, %s, %s)",
-                        (employee_id, trip_type, leave_date, return_date, cost, reason))
-
-            conn.commit()
-            cur.close()
-            conn.close()
-
-            flash('Vacation request submitted successfully!', 'success')
-            return redirect(url_for('submitVacationRequest'))
-
-        except Exception as e:
-            flash(f'Error submitting vacation request: {e}', 'danger')
-
-    # Fetch vacation requests for display
-    try:
-        conn = get_db_connection()
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM vacation_requests ORDER BY leave_date DESC")
-        vacation_requests = cur.fetchall()
-        cur.close()
-        conn.close()
-    except Exception as e:
-        flash(f'Error fetching vacation requests: {e}', 'danger')
-        vacation_requests = []
-
-    return render_template('employee/employee-vacation-requests.html', vacation_requests=vacation_requests)
-    '''
 # manager Routes
 
 # manager Main
@@ -124,30 +40,12 @@ def managerMainPage():
 def managerLoginPage():
     return render_template('manager/manager-login.html')
 
-# manager Register
-@app.route('/manager-register', endpoint='managerRegisterPage')
-def managerRegisterPage():
-    return render_template('manager/manager-register.html')
 
 # manager Forgot Password
 @app.route('/manager-forgot-password', endpoint='managerForgotPasswordPage')
 def managerForgotPasswordPage():
     return render_template('manager/manager-forgot-password.html')
 
-# manager employees
-@app.route('/manager-employees', endpoint='managerEmployeesPage')
-def managerEmployeesPage():
-    return render_template('manager/manager-employees.html')
-
-# manager vacation requests
-@app.route('/manager-vacation-requests', endpoint='managerVacationRequestsPage')
-def managerVacationRequestsPage():
-    return render_template('manager/manager-vacation-requests.html')
-
-# manager supplies requests
-@app.route('/manager-supplies-requests', endpoint='managerSuppliesRequestsPage')
-def managerSuppliesRequestsPage():
-    return render_template('manager/manager-supplies-requests.html')
 
 # Admin Routes
 
@@ -161,24 +59,8 @@ def adminMainPage():
 def adminLoginPage():
     return render_template('admin/admin-login.html')
 
-# admin Register
-@app.route('/admin-register', endpoint='adminRegisterPage')
-def adminRegisterPage():
-    return render_template('admin/admin-register.html')
-
 # admin Forgot Password
 @app.route('/admin-forgot-password', endpoint='adminForgotPasswordPage')
 def adminForgotPasswordPage():
     return render_template('admin/admin-forgot-password.html')
  
-# admin users
-@app.route('/admin-users', endpoint='adminUsers')
-def adminUsers():
-    return render_template('admin/admin-users.html')
-
-
-
-# admin requests
-@app.route('/admin-requests', endpoint='adminRequests')
-def adminRequests():
-    return render_template('admin/admin-requests.html')
