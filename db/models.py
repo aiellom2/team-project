@@ -1,4 +1,7 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
+
+# Import db instance from db/__init__.py without causing circular import
+from db import db
 
 # Define the DB schema
 class City(db.Model):
