@@ -49,13 +49,13 @@ def managerForgotPasswordPage():
 def adminMainPage():
     return render_template('templates/admin/admin-main.html')
 
-@app.route('/admin-login', methods=['GET', 'POST'], endpoint='adminLoginPage')
-def adminLoginPage():
+@app.route('/admin-login', methods=['GET', 'POST'])
+def adminLogin():
     form = AdminLoginForm()
     if form.validate_on_submit():
-        flash('Admin Login Successful!', 'success')
-        return redirect(url_for('adminMainPage'))  # Correct endpoint for redirection
-    return render_template('templates/admin/admin-login.html', form=form)
+        flash('DB CHECK LOGIN INFO HERE')
+        return redirect(url_for('admin-main.html'))
+    return render_template('admin/admin-login.html', form=form)
 
 @app.route('/admin-forgot-password', endpoint='adminForgotPasswordPage')
 def adminForgotPasswordPage():
