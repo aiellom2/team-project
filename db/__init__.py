@@ -1,9 +1,13 @@
+from os import environ, path
+from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
+
 def create_app():
+    # Import Flask inside the function to avoid NameError
+    from flask import Flask
+
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'csc33O'
-
-    from os import environ, path
-    from dotenv import load_dotenv
 
     # Load environment variables
     load_dotenv('.flaskenv')
@@ -17,12 +21,12 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     # Create database connection
-    from flask_sqlalchemy import SQLAlchemy
     db = SQLAlchemy(app)
 
-    # Import routes after app is created
+    # Import routes and models after initializing app to avoid circular import
     from db import routes, models
 
     return app, db
 
+# Create the Flask app and database instance
 app, db = create_app()
