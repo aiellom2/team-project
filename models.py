@@ -1,4 +1,4 @@
-from db import db  # Import db from db/__init__.py
+import db  # Import db from db/__init__.py
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
