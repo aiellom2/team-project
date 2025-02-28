@@ -13,7 +13,7 @@ def employeeMainPage():
 
 @app.route('/employee-login', methods=['GET', 'POST'], endpoint='employeeLoginPage')
 def employeeLoginPage():
-    form = LoginForm()
+    form = AdminLoginForm()
     if form.validate_on_submit():
         # Authentication logic goes here
         flash('Employee Login Successful!', 'success')
@@ -33,7 +33,7 @@ def managerMainPage():
 
 @app.route('/manager-login', methods=['GET', 'POST'], endpoint='managerLoginPage')
 def managerLoginPage():
-    form = LoginForm()
+    form = AdminLoginForm()
     if form.validate_on_submit():
         flash('Manager Login Successful!', 'success')
         return redirect(url_for('managerMainPage'))
@@ -44,8 +44,6 @@ def managerForgotPasswordPage():
     return render_template('manager/manager-forgot-password.html')
 
 
-# Admin Routes
-
 @app.route('/admin-main', endpoint='adminMainPage')
 def adminMainPage():
     return render_template('admin/admin-main.html')
@@ -55,17 +53,13 @@ def adminLoginPage():
     form = AdminLoginForm()
     if form.validate_on_submit():
         flash('Admin Login Successful!', 'success')
-        return redirect(url_for('adminMainPage'))
+        return redirect(url_for('adminMainPage'))  # Correct endpoint for redirection
     return render_template('admin/admin-login.html', form=form)
 
 @app.route('/admin-forgot-password', endpoint='adminForgotPasswordPage')
 def adminForgotPasswordPage():
     return render_template('admin/admin-forgot-password.html')
 
-
-from db import create_app  
-
-app = create_app()
-
+# If you are directly running the application
 if __name__ == '__main__':
     app.run(debug=True)
