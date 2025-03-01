@@ -87,15 +87,6 @@
     <div class="login-container">
         <h2>Admin Login</h2>
 
-        <!-- Flash messages for login errors -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <p style="color: red;">{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-
         <!-- Flask-WTF Form -->
         <form method="POST">
             {{ form.hidden_tag() }}
