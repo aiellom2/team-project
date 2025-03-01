@@ -54,7 +54,7 @@ def adminLogin():
     form = AdminLoginForm()
     if form.validate_on_submit():
         flash('DB CHECK LOGIN INFO HERE')
-        return redirect(url_for('admin-main.html'))
+        return redirect(url_for('adminMain'))
     return render_template('admin/admin-login.html', form=form)
 
 @app.route('/admin-forgot-password',)
