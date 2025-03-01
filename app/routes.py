@@ -9,7 +9,7 @@ import sys
 # Employee Routes
 
 
-@app.route('/admin-main', )
+@app.route('/admin-main')
 def adminMain():
     return render_template('admin/admin-main.html')
 
@@ -21,7 +21,7 @@ def adminLogin():
         return redirect(url_for('admin-main.html'))
     return render_template('admin/admin-login.html', form=form)
 
-@app.route('/admin-forgot-password',)
+@app.route('/admin-forgot-password')
 def adminForgotPassword():
     return render_template('admin/admin-forgot-password.html')
 
