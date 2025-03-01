@@ -87,15 +87,15 @@
 
     <div class="login-container">
         <h2>Employee Login</h2>
-        <form action="{{ url_for('employeeLoginPage') }}" method="POST">
+        <form action="{{ url_for('employeeLogin') }}" method="POST">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Employee Login</button>
         </form>
         <div class="links">
-            <a href="{{ url_for('employeeForgotPasswordPage') }}">Forgot Password?</a>
-            <a href="{{ url_for('managerLoginPage') }}">Login as Manager</a>
-            <a href="{{ url_for('adminLoginPage') }}">Login as Admin</a>
+            <a href="{{ url_for('employeeForgotPassword') }}">Forgot Password?</a>
+            <a href="{{ url_for('managerLogin') }}">Login as Manager</a>
+            <a href="{{ url_for('adminLogin') }}">Login as Admin</a>
 
         </div>
     </div>
