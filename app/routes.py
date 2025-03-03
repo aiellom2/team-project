@@ -26,8 +26,7 @@ def employeeLogin():
             flash('Employee Login Successful!', 'success')
             return redirect(url_for('employeeMain'))
         else:
-            flash('Login failed. Please check your username and password.', 'danger')
-            
+            flash('Invalid username or password!', 'error')            
     return render_template('employee/employee-login.html', form=form)
 @app.route('/employee-forgot-password')
 def employeeForgotPassword():
@@ -53,7 +52,7 @@ def managerLogin():
             flash('Manager Login Successful!', 'success')
             return redirect(url_for('managerMain'))
         else:
-            flash('Login failed. Please check your username and password.', 'danger')
+            flash('Invalid username or password!', 'error')
             
     return render_template('manager/manager-login.html', form=form)
 
@@ -82,7 +81,7 @@ def adminLogin():
             flash('Admin Login Successful!', 'success')
             return redirect(url_for('adminMain'))
         else:
-            flash('Login failed. Please check your username and password.', 'danger')
+            flash('Invalid username or password!', 'error')
             
     return render_template('admin/admin-login.html', form=form)
 

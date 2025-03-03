@@ -50,6 +50,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            color: white;
         }
 
         button:hover {
@@ -79,6 +80,24 @@
             outline: none;
             text-decoration: underline;
         }
+        
+        .flash-message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+        .flash-error {
+            background-color: #ffebee;
+            color: #d32f2f;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .flash-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
     </style>
 </head>
 
@@ -86,6 +105,17 @@
 
     <div class="login-container">
         <h2>Admin Login</h2>
+        
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {% if category == 'error' %}flash-error{% elif category == 'success' %}flash-success{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
 
         <!-- Flask-WTF Form -->
         <form method="POST">
