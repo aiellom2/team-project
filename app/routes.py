@@ -10,7 +10,7 @@ import sys
 
 @app.route('/employee-main')
 def employeeMain():
-    return render_template('templates/employee/employee-main.html')
+    return render_template('employee/employee-main.html')
 
 
 @app.route('/employee-login', methods=['GET', 'POST'])
