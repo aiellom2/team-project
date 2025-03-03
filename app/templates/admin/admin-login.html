@@ -41,19 +41,19 @@
             box-sizing: border-box;
         }
 
-        button {
+        button, input[type="submit"] {
             width: 100%;
             padding: 12px;
             background-color: #4CAF50;
+            color: white;
             font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            color: white;
         }
 
-        button:hover {
+        button:hover, input[type="submit"]:hover {
             background-color: #45A049;
         }
 
@@ -98,6 +98,15 @@
             color: #2e7d32;
             border: 1px solid #c8e6c9;
         }
+        
+        .form-field {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        
+        .form-field label {
+            display: none; /* Hide labels for consistency */
+        }
     </style>
 </head>
 
@@ -117,12 +126,16 @@
         {% endif %}
         {% endwith %}
 
-        <!-- Flask-WTF Form -->
+        <!-- Flask-WTF Form with better styling -->
         <form method="POST">
             {{ form.hidden_tag() }}
-            <p>{{ form.username.label }} {{ form.username }}</p>
-            <p>{{ form.password.label }} {{ form.password }}</p>
-            <p>{{ form.submit(class="login-btn") }}</p>
+            <div class="form-field">
+                {{ form.username(placeholder="Username", class="form-control") }}
+            </div>
+            <div class="form-field">
+                {{ form.password(placeholder="Password", class="form-control") }}
+            </div>
+            {{ form.submit(class="login-btn", value="Admin Login") }}
         </form>
 
         <div class="links">
