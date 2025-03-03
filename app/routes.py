@@ -12,15 +12,23 @@ import sys
 def employeeMain():
     return render_template('templates/employee/employee-main.html')
 
+
 @app.route('/employee-login', methods=['GET', 'POST'])
 def employeeLogin():
     form = AdminLoginForm()
     if form.validate_on_submit():
-        # Authentication logic goes here
-        flash('Employee Login Successful!', 'success')
-        return redirect(url_for('employeeMain'))
+        username = form.username.data
+        password = form.password.data
+        
+        user = User.query.filter_by(username=username, role='employee').first()
+        
+        if user and user.check_password(password):
+            flash('Employee Login Successful!', 'success')
+            return redirect(url_for('employeeMain'))
+        else:
+            flash('Login failed. Please check your username and password.', 'danger')
+            
     return render_template('employee/employee-login.html', form=form)
-
 @app.route('/employee-forgot-password')
 def employeeForgotPassword():
     return render_template('employee/employee-forgot-password.html')
@@ -36,8 +44,17 @@ def managerMain():
 def managerLogin():
     form = AdminLoginForm()
     if form.validate_on_submit():
-        flash('Manager Login Successful!', 'success')
-        return redirect(url_for('managerMain'))
+        username = form.username.data
+        password = form.password.data
+        
+        user = User.query.filter_by(username=username, role='manager').first()
+        
+        if user and user.check_password(password):
+            flash('Manager Login Successful!', 'success')
+            return redirect(url_for('managerMain'))
+        else:
+            flash('Login failed. Please check your username and password.', 'danger')
+            
     return render_template('manager/manager-login.html', form=form)
 
 @app.route('/manager-forgot-password')
@@ -53,8 +70,20 @@ def adminMain():
 def adminLogin():
     form = AdminLoginForm()
     if form.validate_on_submit():
-        flash('DB CHECK LOGIN INFO HERE')
-        return redirect(url_for('adminMain'))
+        # Get user data from form
+        username = form.username.data
+        password = form.password.data
+        
+        # Query the database for the user
+        user = User.query.filter_by(username=username, role='admin').first()
+        
+        # Check if user exists and password is correct
+        if user and user.check_password(password):
+            flash('Admin Login Successful!', 'success')
+            return redirect(url_for('adminMain'))
+        else:
+            flash('Login failed. Please check your username and password.', 'danger')
+            
     return render_template('admin/admin-login.html', form=form)
 
 @app.route('/admin-forgot-password',)
