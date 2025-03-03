@@ -13,20 +13,25 @@ with app.app_context():
     # Create admin user
     admin = User(
         username='admin',
-        password_hash=generate_password_hash('admin123'),  # Change this to a secure password
+        password_hash=generate_password_hash('admin123'), 
         role='admin'
     )
     db.session.add(admin)
     
-    # You can add more initial users here if needed
-    # Example:
-    # manager = User(
-    #     username='manager',
-    #     password_hash=generate_password_hash('manager123'),
-    #     role='manager'
-    # )
-    # db.session.add(manager)
+    manager = User(
+         username='manager',
+         password_hash=generate_password_hash('manager123'),
+         role='manager'
+     )
+    db.session.add(manager)
+
+    employee = User(
+         username='employee',
+         password_hash=generate_password_hash('employee123'),
+         role='employee'
+     )
+    db.session.add(employee)
     
     # Commit all changes
     db.session.commit()
-    print('Database recreated and admin user created successfully!')
+    print('Database has been either been edited and or created successfully!')
