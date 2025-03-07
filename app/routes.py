@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect, url_for, flash
-from app.forms import AdminLoginForm
+from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm
 from app import db
 from app.models import User
 import sys
@@ -15,7 +15,7 @@ def employeeMain():
 
 @app.route('/employee-login', methods=['GET', 'POST'])
 def employeeLogin():
-    form = AdminLoginForm()
+    form = EmployeeLoginForm()
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
@@ -41,7 +41,7 @@ def managerMain():
 
 @app.route('/manager-login', methods=['GET', 'POST'])
 def managerLogin():
-    form = AdminLoginForm()
+    form = ManagerLoginForm()
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
