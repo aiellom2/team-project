@@ -138,7 +138,7 @@ def adminManagers():
             email=form.email.data,
             password_hash=generate_password_hash(form.password.data),
             role='manager',
-            created_at=datetime.now()
+            created_at=datetime.datetime.now()
         )
         
         try:
