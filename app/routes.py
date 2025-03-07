@@ -1,7 +1,7 @@
 import datetime
 from app import app
 from flask import render_template, request, redirect, url_for, flash
-from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm, RequestTypeForm, AddManagerForm
+from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm, RequestTypeForm, AddManagerForm, AddEmployeeForm
 from app import db
 from app.models import User, RequestType
 from werkzeug.security import generate_password_hash
@@ -30,9 +30,100 @@ def employeeLogin():
         else:
             flash('Invalid username or password!', 'error')            
     return render_template('employee/employee-login.html', form=form)
+
 @app.route('/employee-forgot-password')
 def employeeForgotPassword():
     return render_template('employee/employee-forgot-password.html')
+
+# Main managers page route
+@app.route('/admin-employees', methods=['GET', 'POST'])
+def adminEmployees():
+    
+    form = AddEmployeeForm()
+    
+    if form.validate_on_submit():
+        # Create new manager
+        new_employee = User(
+            username=form.username.data,
+            email=form.email.data,
+            password_hash=generate_password_hash(form.password.data),
+            role='employee',
+        )
+        
+        try:
+            db.session.add(new_employee)
+            db.session.commit()
+            flash('Employee added successfully!', 'success')
+            return redirect(url_for('adminEmployees'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error adding employee: {str(e)}', 'error')
+    
+    # Get all managers
+    employees = User.query.filter_by(role='employee').all()
+    
+    return render_template('admin/admin-employees.html', form=form, employees=employees)
+
+# Delete employee route
+@app.route('/admin-delete-employee/<int:employee_id>', methods=['POST'])
+def adminDeleteManager(employee_id):
+    employee = User.query.get_or_404(employee_id)
+    
+    if employee.role != 'employee':
+        flash('Invalid employee ID', 'error')
+        return redirect(url_for('adminEmployees'))
+    
+    try:
+        db.session.delete(employee)
+        db.session.commit()
+        flash('Employee deleted successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error deleting employee: {str(e)}', 'error')
+    
+    return redirect(url_for('adminEmployees'))
+
+# Update employee route
+@app.route('/admin-update-employee/<int:employee_id>', methods=['POST'])
+def adminUpdateEmployee(employee_id):
+    employee = User.query.get_or_404(employee_id)
+    
+    if employee.role != 'employee':
+        flash('Invalid employee ID', 'error')
+        return redirect(url_for('adminEmployees'))
+    
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    
+    # Check if username already exists for another user
+    existing_user = User.query.filter(User.username == username, User.id != employee_id).first()
+    if existing_user:
+        flash('Username already taken', 'error')
+        return redirect(url_for('adminEmployees'))
+    
+    # Check if email already exists for another user
+    existing_email = User.query.filter(User.email == email, User.id != employee_id).first()
+    if existing_email:
+        flash('Email already registered', 'error')
+        return redirect(url_for('adminEmployees'))
+    
+    try:
+        employee.username = username
+        employee.email = email
+        
+        # Only update password if provided
+        if password and password.strip():
+            employee.password_hash = generate_password_hash(password)
+        
+        db.session.commit()
+        flash('Employee updated successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error updating employee: {str(e)}', 'error')
+    
+    return redirect(url_for('adminEmployees'))
+
 
 
 # Manager Routes
