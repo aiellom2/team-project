@@ -13,7 +13,10 @@ function loadSidebar() {
             <div class="sidebar-heading border-bottom bg-light">Admin</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>
-
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-request-types">Request Types</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-managers">Managers</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-managers">Employees</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-managers">Office Supplies</a>
 
         
             </div>
