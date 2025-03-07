@@ -39,7 +39,6 @@ with app.app_context():
         RequestType(name='Tech Support'),
         RequestType(name='Vacation Request'),
         RequestType(name='Business Request')
-
     ]
     
     for request_type in initial_request_types:
