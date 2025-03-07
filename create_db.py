@@ -37,7 +37,9 @@ with app.app_context():
         RequestType(name='Time Off'),
         RequestType(name='Equipment Request'),
         RequestType(name='Tech Support'),
-        RequestType(name='Expense Reimbursement')
+        RequestType(name='Vacation Request'),
+        RequestType(name='Business Request')
+
     ]
     
     for request_type in initial_request_types:
