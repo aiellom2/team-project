@@ -61,6 +61,8 @@ def managerForgotPassword():
     return render_template('manager/manager-forgot-password.html')
 
 
+# Admin Routes
+
 @app.route('/admin-main', )
 def adminMain():
     return render_template('admin/admin-main.html')
@@ -119,6 +121,111 @@ def adminLogin():
 @app.route('/admin-forgot-password',)
 def adminForgotPassword():
     return render_template('admin/admin-forgot-password.html')
+
+class AddManagerForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=64)])
+    email = EmailField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
+    submit = SubmitField('Add Manager')
+    
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError('Username already taken. Please choose a different one.')
+    
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError('Email already registered. Please use a different one.')
+
+# Main managers page route
+@app.route('/admin-managers', methods=['GET', 'POST'])
+def adminManagers():
+    form = AddManagerForm()
+    
+    if form.validate_on_submit():
+        # Create new manager
+        new_manager = User(
+            username=form.username.data,
+            email=form.email.data,
+            password_hash=generate_password_hash(form.password.data),
+            role='manager',
+            created_at=datetime.now()
+        )
+        
+        try:
+            db.session.add(new_manager)
+            db.session.commit()
+            flash('Manager added successfully!', 'success')
+            return redirect(url_for('adminManagers'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error adding manager: {str(e)}', 'error')
+    
+    # Get all managers
+    managers = User.query.filter_by(role='manager').all()
+    
+    return render_template('admin/admin-managers-page.html', form=form, managers=managers)
+
+# Delete manager route
+@app.route('/admin-delete-manager/<int:manager_id>', methods=['POST'])
+def adminDeleteManager(manager_id):
+    manager = User.query.get_or_404(manager_id)
+    
+    if manager.role != 'manager':
+        flash('Invalid manager ID', 'error')
+        return redirect(url_for('adminManagers'))
+    
+    try:
+        db.session.delete(manager)
+        db.session.commit()
+        flash('Manager deleted successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error deleting manager: {str(e)}', 'error')
+    
+    return redirect(url_for('adminManagers'))
+
+# Update manager route
+@app.route('/admin-update-manager/<int:manager_id>', methods=['POST'])
+def adminUpdateManager(manager_id):
+    manager = User.query.get_or_404(manager_id)
+    
+    if manager.role != 'manager':
+        flash('Invalid manager ID', 'error')
+        return redirect(url_for('adminManagers'))
+    
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    
+    # Check if username already exists for another user
+    existing_user = User.query.filter(User.username == username, User.id != manager_id).first()
+    if existing_user:
+        flash('Username already taken', 'error')
+        return redirect(url_for('adminManagers'))
+    
+    # Check if email already exists for another user
+    existing_email = User.query.filter(User.email == email, User.id != manager_id).first()
+    if existing_email:
+        flash('Email already registered', 'error')
+        return redirect(url_for('adminManagers'))
+    
+    try:
+        manager.username = username
+        manager.email = email
+        
+        # Only update password if provided
+        if password and password.strip():
+            manager.password_hash = generate_password_hash(password)
+        
+        db.session.commit()
+        flash('Manager updated successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error updating manager: {str(e)}', 'error')
+    
+    return redirect(url_for('adminManagers'))
 
 # If you are directly running the application
 if __name__ == '__main__':
