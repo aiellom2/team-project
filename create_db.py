@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User, RequestType
+from app.models import User, RequestType, 
 from werkzeug.security import generate_password_hash
 
 # Drop existing tables and create new ones

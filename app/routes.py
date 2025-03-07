@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect, url_for, flash
-from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm, RequestTypeForm
+from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm, RequestTypeForm, AddManagerForm
 from app import db
 from app.models import User, RequestType
 import sys
@@ -122,21 +122,6 @@ def adminLogin():
 def adminForgotPassword():
     return render_template('admin/admin-forgot-password.html')
 
-class AddManagerForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=64)])
-    email = EmailField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
-    submit = SubmitField('Add Manager')
-    
-    def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user:
-            raise ValidationError('Username already taken. Please choose a different one.')
-    
-    def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user:
-            raise ValidationError('Email already registered. Please use a different one.')
 
 # Main managers page route
 @app.route('/admin-managers', methods=['GET', 'POST'])
