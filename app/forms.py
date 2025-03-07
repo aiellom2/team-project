@@ -28,4 +28,8 @@ class AddManagerForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
     submit = SubmitField('Add Manager')
 
-    
+class AddEmployeeForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=64)])
+    email = EmailField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
+    submit = SubmitField('Add Employee')

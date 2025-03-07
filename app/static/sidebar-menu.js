@@ -15,8 +15,8 @@ function loadSidebar() {
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-main">Main</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-request-types">Request Types</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-managers">Managers</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-managers">Employees</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-managers">Office Supplies</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-employees">Employees</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="${baseUrl}-office-supplies">Office Supplies</a>
 
         
             </div>
