@@ -66,7 +66,7 @@ def adminEmployees():
 
 # Delete employee route
 @app.route('/admin-delete-employee/<int:employee_id>', methods=['POST'])
-def adminDeleteManager(employee_id):
+def adminDeleteEmployee(employee_id):
     employee = User.query.get_or_404(employee_id)
     
     if employee.role != 'employee':
