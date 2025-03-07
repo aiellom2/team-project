@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect, url_for, flash
-from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm
+from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm, RequestTypeForm
 from app import db
 from app.models import User
 import sys
@@ -64,6 +64,24 @@ def managerForgotPassword():
 @app.route('/admin-main', )
 def adminMain():
     return render_template('admin/admin-main.html')
+
+@app.route('/admin-request-types', methods=['GET', 'POST'])
+def adminRequestTypes():
+    form = RequestTypeForm()
+    if form.validate_on_submit():
+        existing_type = RequestType.query.filter_by(name=form.name.data).first()
+        if existing_type:
+            flash('This request type already exists!', 'error')
+        else:
+            new_type = RequestType(name=form.name.data)
+            db.session.add(new_type)
+            db.session.commit()
+            flash('Request type added successfully!', 'success')
+            return redirect(url_for('adminRequestTypes'))
+    
+    request_types = RequestType.query.all()
+    return render_template('admin/admin-request-types.html', form=form, request_types=request_types)
+
 
 @app.route('/admin-login', methods=['GET', 'POST'])
 def adminLogin():

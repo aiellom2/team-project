@@ -17,3 +17,7 @@ class EmployeeLoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Employee Login')
+
+class RequestTypeForm(FlaskForm):
+    name = StringField('Request Type Name', validators=[DataRequired()])
+    submit = SubmitField('Add Request Type')

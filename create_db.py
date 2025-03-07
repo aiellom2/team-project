@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User
+from app.models import User, RequestType
 from werkzeug.security import generate_password_hash
 
 # Drop existing tables and create new ones
@@ -31,6 +31,17 @@ with app.app_context():
          role='employee'
      )
     db.session.add(employee)
+    
+    # Create initial request types
+    initial_request_types = [
+        RequestType(name='Time Off'),
+        RequestType(name='Equipment Request'),
+        RequestType(name='Tech Support'),
+        RequestType(name='Expense Reimbursement')
+    ]
+    
+    for request_type in initial_request_types:
+        db.session.add(request_type)
     
     # Commit all changes
     db.session.commit()
