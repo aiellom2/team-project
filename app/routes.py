@@ -82,6 +82,19 @@ def adminRequestTypes():
     request_types = RequestType.query.all()
     return render_template('admin/admin-request-types.html', form=form, request_types=request_types)
 
+@app.route('/admin-delete-request-type/<int:type_id>', methods=['POST'])
+def adminDeleteRequestType(type_id):
+    request_type = RequestType.query.get_or_404(type_id)
+    try:
+        db.session.delete(request_type)
+        db.session.commit()
+        flash('Request type deleted successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash('Error deleting request type!', 'error')
+    
+    return redirect(url_for('adminRequestTypes'))
+
 
 @app.route('/admin-login', methods=['GET', 'POST'])
 def adminLogin():
