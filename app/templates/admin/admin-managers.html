@@ -232,8 +232,7 @@
                                                     <th>ID</th>
                                                     <th>Username</th>
                                                     <th>Email</th>
-                                                    <th>Created Date</th>
-                                                    <th>Last Login</th>
+                                         
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -243,8 +242,7 @@
                                                     <td>{{ manager.id }}</td>
                                                     <td>{{ manager.username }}</td>
                                                     <td>{{ manager.email }}</td>
-                                                    <td>{{ manager.created_at.strftime('%Y-%m-%d %H:%M') if manager.created_at else 'N/A' }}</td>
-                                                    <td>{{ manager.last_login.strftime('%Y-%m-%d %H:%M') if manager.last_login else 'Never' }}</td>
+                                                    
                                                     <td>
                                                         <button type="button" class="btn-action btn-edit" 
                                                             data-bs-toggle="modal" 
