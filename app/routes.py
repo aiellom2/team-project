@@ -150,7 +150,7 @@ def adminManagers():
     # Get all managers
     managers = User.query.filter_by(role='manager').all()
     
-    return render_template('admin/admin-managers-page.html', form=form, managers=managers)
+    return render_template('admin/admin-managers.html', form=form, managers=managers)
 
 # Delete manager route
 @app.route('/admin-delete-manager/<int:manager_id>', methods=['POST'])
