@@ -1,8 +1,11 @@
+import datetime
 from app import app
 from flask import render_template, request, redirect, url_for, flash
 from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm, RequestTypeForm, AddManagerForm
 from app import db
 from app.models import User, RequestType
+from werkzeug.security import generate_password_hash
+import email_validator
 import sys
 
 
@@ -126,6 +129,7 @@ def adminForgotPassword():
 # Main managers page route
 @app.route('/admin-managers', methods=['GET', 'POST'])
 def adminManagers():
+    
     form = AddManagerForm()
     
     if form.validate_on_submit():
