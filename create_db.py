@@ -1,49 +1,39 @@
 from app import app, db
-from app.models import User, RequestType 
+from app.models import User, RequestType
 from werkzeug.security import generate_password_hash
 
 # Drop existing tables and create new ones
 with app.app_context():
-    # This will drop all existing tables
+    # Drop all existing tables
     db.drop_all()
     
-    # This will create all tables based on your models
+    # Create all tables based on your models
     db.create_all()
     
-    # Create admin user
-    admin = User(
-        username='admin',
-        password_hash=generate_password_hash('admin123'), 
-        role='admin'
-    )
-    db.session.add(admin)
-    
-    manager = User(
-         username='manager',
-         password_hash=generate_password_hash('manager123'),
-         role='manager'
-     )
-    db.session.add(manager)
-
-    employee = User(
-         username='employee',
-         password_hash=generate_password_hash('employee123'),
-         role='employee'
-     )
-    db.session.add(employee)
-    
-    # Create initial request types
-    initial_request_types = [
-        RequestType(name='Time Off'),
-        RequestType(name='Equipment Request'),
-        RequestType(name='Tech Support'),
-        RequestType(name='Vacation Request'),
-        RequestType(name='Business Request')
+    # Create default users with emails
+    users = [
+        {"username": "admin", "email": "admin@example.com", "password": "admin123", "role": "admin"},
+        {"username": "manager", "email": "manager@example.com", "password": "manager123", "role": "manager"},
+        {"username": "employee", "email": "employee@example.com", "password": "employee123", "role": "employee"},
     ]
     
-    for request_type in initial_request_types:
-        db.session.add(request_type)
+    for user in users:
+        new_user = User(
+            username=user["username"],
+            email=user["email"],
+            password_hash=generate_password_hash(user["password"]),
+            role=user["role"]
+        )
+        db.session.add(new_user)
+    
+    # Create initial request types
+    request_types = [
+        "Time Off", "Equipment Request", "Tech Support", "Vacation Request", "Business Request"
+    ]
+    
+    for name in request_types:
+        db.session.add(RequestType(name=name))
     
     # Commit all changes
     db.session.commit()
-    print('Database has been either been edited and or created successfully!')
+    print("Database has been edited and/or created successfully!")
