@@ -5,7 +5,6 @@ from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm, Reque
 from app import db
 from app.models import User, RequestType
 from werkzeug.security import generate_password_hash
-import email_validator
 import sys
 
 
