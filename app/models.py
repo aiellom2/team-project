@@ -40,4 +40,4 @@ class OfficeSupply(db.Model):
     stock = db.Column(db.String(100), unique=True, nullable=False)
 
     def __repr__(self):
-        return f'<RequestType {self.name}>'
+        return f'<Office Supply {self.name,self.price,self.stock}>'
