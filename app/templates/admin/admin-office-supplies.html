@@ -182,7 +182,7 @@
                                                 <td>{{ office_supply.price }}</td>
                                                 <td>{{ office_supply.stock }}</td>
                                                 <td>
-                                                    <form action="{{ url_for('adminDeleteOfficeSupply', type_id=request_type.id) }}" method="POST" style="display: inline;">
+                                                    <form action="{{ url_for('adminDeleteOfficeSupply', supply_id=office_supply.id) }}" method="POST" style="display: inline;">
                                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this office supply?');">Delete</button>
                                                     </form>
                                                 </td>
