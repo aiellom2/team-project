@@ -1,9 +1,9 @@
 import datetime
 from app import app
 from flask import render_template, request, redirect, url_for, flash
-from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm, RequestTypeForm, AddManagerForm, AddEmployeeForm
+from app.forms import AdminLoginForm, EmployeeLoginForm, ManagerLoginForm, RequestTypeForm, AddManagerForm, AddEmployeeForm, OfficeSupplyForm
 from app import db
-from app.models import User, RequestType
+from app.models import User, RequestType, OfficeSupply
 from werkzeug.security import generate_password_hash
 import sys
 
@@ -125,9 +125,7 @@ def adminUpdateEmployee(employee_id):
     return redirect(url_for('adminEmployees'))
 
 
-
 # Manager Routes
-
 @app.route('/manager-main')
 def managerMain():
     return render_template('manager/manager-main.html')
@@ -155,7 +153,6 @@ def managerForgotPassword():
 
 
 # Admin Routes
-
 @app.route('/admin-main', )
 def adminMain():
     return render_template('admin/admin-main.html')
@@ -189,6 +186,36 @@ def adminDeleteRequestType(type_id):
         flash('Error deleting request type!', 'error')
     
     return redirect(url_for('adminRequestTypes'))
+
+@app.route('/admin-office-supplies', methods=['GET', 'POST'])
+def adminOfficeSupplies():
+    form = OfficeSupplyForm()
+    if form.validate_on_submit():
+        existing_supplies = OfficeSupply.query.filter_by(name=form.name.data).first()
+        if existing_supplies:
+            flash('This office supply already exists!', 'error')
+        else:
+            new_Supply = OfficeSupply(name=form.name.data, price=form.price.data, stock=form.stock.data)
+            db.session.add(new_Supply)
+            db.session.commit()
+            flash('New Office Supply added successfully!', 'success')
+            return redirect(url_for('adminOfficeSupplies'))
+    
+    office_supplies = OfficeSupply.query.all()
+    return render_template('admin/admin-office-supplies.html', form=form, office_supplies=office_supplies)
+
+@app.route('/admin-delete-office-supply/<int:supply_id>', methods=['POST'])
+def adminDeleteOfficeSupply(supply_id):
+    office_supply = OfficeSupply.query.get_or_404(supply_id)
+    try:
+        db.session.delete(office_supply)
+        db.session.commit()
+        flash('Office supply deleted successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash('Error deleting office supply!', 'error')
+    
+    return redirect(url_for('adminDeleteOfficeSupply'))
 
 
 @app.route('/admin-login', methods=['GET', 'POST'])
@@ -266,6 +293,9 @@ def adminDeleteManager(manager_id):
 
 # Update manager route
 @app.route('/admin-update-manager/<int:manager_id>', methods=['POST'])
+
+
+
 def adminUpdateManager(manager_id):
     manager = User.query.get_or_404(manager_id)
     

@@ -33,3 +33,9 @@ class AddEmployeeForm(FlaskForm):
     email = EmailField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
     submit = SubmitField('Add Employee')
+
+class OfficeSupplyForm(FlaskForm):
+    name = StringField('Office Supply Name', validators=[DataRequired()])
+    price = StringField('Office Supply Price Per Unit', validators=[DataRequired()])
+    stock = StringField('Office Supply Stock / Quantity', validators=[DataRequired()])
+    submit = SubmitField('Add Office Supply')

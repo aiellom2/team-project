@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User, RequestType
+from app.models import User, RequestType, OfficeSupply
 from werkzeug.security import generate_password_hash
 
 # Drop existing tables and create new ones
@@ -25,6 +25,22 @@ with app.app_context():
             role=user["role"]
         )
         db.session.add(new_user)
+
+
+    office_supplies = [
+        {"name": "pencil", "price": "$1", "stock": "100"},
+        {"name": "chair", "price": "$50", "stock": "16"}
+    ]
+    
+    for supply in office_supplies:
+        new_office_supply = OfficeSupply(
+            name=supply["name"],
+            price=supply["price"],
+            stock=supply["stock"]
+        )
+        db.session.add(new_office_supply)
+
+    
     
     # Create initial request types
     request_types = [
