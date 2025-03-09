@@ -215,7 +215,7 @@ def adminDeleteOfficeSupply(supply_id):
         db.session.rollback()
         flash('Error deleting office supply!', 'error')
     
-    return redirect(url_for('adminDeleteOfficeSupply',supply_id=supply_id))
+    return redirect(url_for('adminDeleteOfficeSupply'))
 
 
 @app.route('/admin-login', methods=['GET', 'POST'])
